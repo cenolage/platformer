@@ -8,7 +8,11 @@ abstract class Creation {
 	Shape collisionMask;
 	Shape renderedShape;
 	
+	final public double GRAVITY = 0.1;
+	
 	public void move(){
+		insVelocity.y += GRAVITY;
+		
 		position.x += insVelocity.x;
 		position.y += insVelocity.y;
 		
@@ -16,18 +20,27 @@ abstract class Creation {
 //		insVelocity.y = 0;
 	}
 	
-	public void expMove(char c, int num) {
-		if (c == 'x') {
-			insVelocity.x = num;
-		} else if (c == 'y'){
-			insVelocity.y = num;
-		} else {
-			throw new Error("Invalid character: " + c);
-		}
-		
-		// Access its parent somehow and add itself onto Grid A
+//	public void expMove(int x, int y) {
+//		insVelocity.x = x;
+//		insVelocity.y = y;
+//		
+//		// Access its parent somehow and add itself onto Grid A
+//	}
+	
+	public PVector getVel() {
+		return insVelocity;
+	}
+	
+	public void expMoveY(int y) {
+		insVelocity.y = y;
+	}
+	
+	public void expMoveX(int x) {
+		insVelocity.x = x;
 	}
 		
+	//expMoveY and expMoveX are also supposed to 'access its parent somehow and add itself onto grid A'?
+	
 	// Keep for now
 	public void display() {
 		parent.stroke(0);

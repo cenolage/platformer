@@ -14,7 +14,7 @@ public class Program extends PApplet {
 		background(255);
 		frameRate(60);
 		
-		player = new InteractableCreation(this, 50, 600);
+		player = new InteractableCreation(this, 50, 0);
 		rock = new NonInteractableCreation(this, 610, 260);
 		game.addPlayer(player);
 		game.addCreation(rock);
@@ -34,20 +34,16 @@ public class Program extends PApplet {
 		if (key == CODED) {
 			switch (keyCode) {
 				case UP: 
-					player.expMove('y', -5);
-					player.expMove('x', 0);
+					player.expMoveY(-5);
 					break;
 				case DOWN:
-					player.expMove('y', 5);
-					player.expMove('x', 0);
+					player.expMoveY(5);
 					break;
 				case RIGHT: 
-					player.expMove('x', 5);
-					player.expMove('y', 0);
+					player.expMoveX(5);
 					break;
 				case LEFT: 
-					player.expMove('x', -5);
-					player.expMove('y', 0);
+					player.expMoveX(-5);
 					break;
 				default:
 					return;
@@ -58,17 +54,21 @@ public class Program extends PApplet {
 	public void keyReleased() {
 		if (key == CODED) {
 			switch (keyCode) {
-				case UP: 
-					player.expMove('y', 0);
+				case UP:
+					if (player.getVel().y < 0)
+						player.expMoveY(0);
 					break;
-				case DOWN: 
-					player.expMove('y', 0);
+				case DOWN:
+					if (player.getVel().y > 0)
+						player.expMoveY(0);
 					break;
-				case RIGHT: 
-					player.expMove('x', 0);
+				case RIGHT:
+					if (player.getVel().x > 0)
+						player.expMoveX(0);
 					break;
-				case LEFT: 
-					player.expMove('x', 0);
+				case LEFT:
+					if (player.getVel().x < 0)
+						player.expMoveX(0);
 					break;
 			}
 		}
